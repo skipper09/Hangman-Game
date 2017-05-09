@@ -1,5 +1,6 @@
+// var words = ["Ice Cream","Hot Baths"];
 var words = {
-    w1: ["_ _ _  _ _ _ _ _ ", "Ice Cream", "i", "c", "e", "r", "a", "m"],
+    w1: ["Ice Cream"],
     w2: ["Hot Baths"],
     w3: ["Red Wine"],
     w4: ["Friends and Family"],
@@ -9,41 +10,105 @@ var words = {
 };
 
 var wins = 0;
+var lettersGuessed = [];
+var guessesLeft = (12 - (lettersGuessed.length));
+
 
 var wordIndex = 0;
-var wordsArray = [words.w1, words.w2, words.w3, words.w4];
+var wordsArray = [words.w1, words.w2, words.w3, words.w4, words.w5, words.w6, words.w7];
 
-function renderWord() {
-    if (wordIndex <= (wordsArray.length - 1)) {
-        document.querySelector("#currentword").innerHTML = wordsArray[wordIndex][0];
-    } else {
-        alert("game over! thanks for playing")
+var currentword = "cat";
+
+var s;
+var count = 0;
+var answerArray = [];
+
+function setUpGame () {
+    for (var i = 0; i < currentword.length; i++) {
+        answerArray[i] = "_";
+        console.log("poop")
     }
+
+    s = answerArray.join(" ");
+    document.querySelector("#currentword").innerHTML = s;
+}
+
+// var currentword = wordsArray[wordIndex][0];
+
+
+// var currentword = function () {
+//     if (wordIndex <= (wordsArray.length - 1)) {
+//         wordsArray[wordIndex][0];}}
+
+
+
+// var currentword = function () {
+//     if (wordIndex <= (wordsArray.length - 1)) {
+//         // document.querySelector("#currentword").innerHTML = wordsArray[wordIndex][0];
+
+    // }
+    //     document.querySelector("#currentword").style.color = "white";
+    //     for (var i = 0; i < currentword.length; i++) {
+    //     answerArray[i] = "_";
+    // }
+
+    // s = answerArray.join(" ");
+    // document.querySelector("#currentword").innerHTML = s;
+    // // } else {
+    //     alert("game over! thanks for playing")
+    // }
+        // };}
+
+function updateScore() {
+    document.querySelector("#wins").innerHTML = "<p>Wins: " + wins + "</p>"
+    document.querySelector("#guesses-remaining").innerHTML = "Guesses Remaining: " + guessesLeft;
+    document.querySelector("#guessed").innerHTML = "Letters Guessed: " + lettersGuessed
 };
 
+// renderWord();
+
+setUpGame();
+updateScore();
 
 
-// function updateScore() {
-//     document.querySelector("wins").innerHTML = "<p>Wins: " + wins + "</p>"
-//     document.querySelector("guesses-remaining").innerHTML = "Guesses Remaining: " + guessesLeft;
-//     document.querySelector("guessed").innerHTML = "Letters Guessed: " + lettersGuessed
-// };
-
-renderWord();
-// updateScore();
 
 document.onkeyup = function(event) {
 
-    if (wordIndex === wordsArray.length) {
-        return;
-    }
+    var letter = String.fromCharCode(event.keyCode).toLowerCase();
+    console.log(letter);
 
-    var letter = String.fromCharCode(event.keycode).toLowerCase();
-
-    if (letter === wordsArray[wordIndex][1]) {
-        alert("hello");
-    }
-
-
-
+    lettersGuessed.push(letter);
+    lettersGuessed.sort();
+    updateScore ();
 };
+
+    // function drawGuesses  () {
+    //     lettersGuessed.push(letter);
+
+    //     updateScore();
+    // }
+
+    // if ("#currentword" == words.w1[0]) {
+
+        // if (letter === "i") {
+    //     //     document.querySelector("#currentword").style.display = "block";
+    //     // }
+
+    // }
+
+    //     // if(letter === "t") {
+    //     // alert("hello!")
+    //     // wordIndex++;
+    //     // renderWord();
+    // }
+
+    // // if (wordIndex === wordsArray.length) {
+    //     return;
+    // }
+
+    // var letter = String.fromCharCode(event.keycode).toLowerCase();
+
+    // if (letter === "i") {
+    //     console.log("hello")
+//     // };
+// };
