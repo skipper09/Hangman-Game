@@ -13,7 +13,6 @@ var wins = 0;
 var lettersGuessed = [];
 var guessesLeft = (12 - (lettersGuessed.length));
 
-
 // var wordIndex = 0;
 // var wordsArray = [words.w1, words.w2, words.w3, words.w4, words.w5, words.w6, words.w7];
 
@@ -42,57 +41,23 @@ function getLetter() {
 
     if (letter.length > 0) {
         for (var i = 0; i < currentword.length; i++) {
-            if (currentword[i] == letter); {
-                answerArray [i] = letter;
+            if (currentword[i] == letter) {
+                answerArray[i] = letter;
                 console.log("letter")
             }
         }
-
-        // document.querySelector("#currentword").innerHTML = answerArray.join(" ");
 
     }
 
     updateScore();
 }
 
-// var currentword = wordsArray[wordIndex][0];
-
-
-// var currentword = function () {
-//     if (wordIndex <= (wordsArray.length - 1)) {
-//         wordsArray[wordIndex][0];}}
-
-
-
-// var currentword = function () {
-//     if (wordIndex <= (wordsArray.length - 1)) {
-//         // document.querySelector("#currentword").innerHTML = wordsArray[wordIndex][0];
-
-// }
-//     document.querySelector("#currentword").style.color = "white";
-//     for (var i = 0; i < currentword.length; i++) {
-//     answerArray[i] = "_";
-// }
-
-// s = answerArray.join(" ");
-// document.querySelector("#currentword").innerHTML = s;
-// // } else {
-//     alert("game over! thanks for playing")
-// }
-// };}
 
 function updateScore() {
     document.querySelector("#wins").innerHTML = "<p>Wins: " + wins + "</p>"
     document.querySelector("#guesses-remaining").innerHTML = "Guesses Remaining: " + guessesLeft;
     document.querySelector("#guessed").innerHTML = "Letters Guessed: " + lettersGuessed
 };
-
-// renderWord();
-
-setUpGame();
-updateScore();
-
-
 
 document.onkeyup = function(event) {
 
@@ -101,36 +66,67 @@ document.onkeyup = function(event) {
 
     lettersGuessed.push(letter);
     lettersGuessed.sort();
-    updateScore ();
+    updateScore();
 };
 
-// function drawGuesses  () {
-//     lettersGuessed.push(letter);
+document.onkeyup = function(event) {
 
-//     updateScore();
-// }
+        var letter = String.fromCharCode(event.keyCode).toLowerCase();
+        console.log(letter);
 
-// if ("#currentword" == words.w1[0]) {
+        lettersGuessed.push(letter);
+        lettersGuessed.sort();
 
-// if (letter === "i") {
-//     //     document.querySelector("#currentword").style.display = "block";
-//     // }
 
-// }
+        document.onkeyup = function(event) {
+            var letter = String.fromCharCode(event.keyCode).toLowerCase();
+            var letterArray = guessLetter(letter, answerArray);
 
-//     // if(letter === "t") {
-//     // alert("hello!")
-//     // wordIndex++;
-//     // renderWord();
-// }
+        }
 
-// // if (wordIndex === wordsArray.length) {
-//     return;
-// }
 
-// var letter = String.fromCharCode(event.keycode).toLowerCase();
+function guessLetter(letter,currentWordArray) {
+    var resultArray = [];
 
-// if (letter === "i") {
-//     console.log("hello")
-//     // };
-// };
+    if (letter.length > 0) {
+        for (var i = 0; i < currentWordArray.length; i++) {
+            if (currentword[i] == letter) {
+                answerArray[i] = letter;
+                console.log("letter")
+            }
+        }
+
+        return resultArray;
+
+    }
+}
+
+
+    // renderWord();
+    setUpGame();
+    updateScore();
+
+
+
+    // var currentword = function () {
+    //     if (wordIndex <= (wordsArray.length - 1)) {
+    //         wordsArray[wordIndex][0];}}
+
+
+
+    // var currentword = function () {
+    //     if (wordIndex <= (wordsArray.length - 1)) {
+    //         // document.querySelector("#currentword").innerHTML = wordsArray[wordIndex][0];
+
+    // }
+    //     document.querySelector("#currentword").style.color = "white";
+    //     for (var i = 0; i < currentword.length; i++) {
+    //     answerArray[i] = "_";
+    // }
+
+    // s = answerArray.join(" ");
+    // document.querySelector("#currentword").innerHTML = s;
+    // // } else {
+    //     alert("game over! thanks for playing")
+    // }
+    // };}
