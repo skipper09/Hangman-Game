@@ -1,21 +1,18 @@
-var words = ["icecream", "hotbaths", "redwine", "friendsandfamily", "shaveyourhead", "keyhiscar", "burnhishousedown"];
-
+var words = ["dessert", "baths", "wine", "friends", "shaveyourhead", "keyhiscar", "burnhishousedown"];
 var winElement = document.querySelector("#wins");
 var guessesRemainingElement = document.querySelector("#guesses-remaining");
 var guessedLettersElement = document.querySelector("#guessed");
 var currentWordElement = document.querySelector("#currentword");
-
 var currentWord = words[Math.floor(Math.random() * words.length)];
-
 var wins = 0;
 var lettersGuessed = [];
 var uniqueLettersGuessed = [];
-function guessesLeft() { 
-	return 12 - uniqueLettersGuessed.length
-};
-
 var s;
 var answerArray = [];
+
+function guessesLeft() {
+    return 12 - uniqueLettersGuessed.length
+};
 
 function setUpGame() {
     for (var i = 0; i < currentWord.length; i++) {
@@ -36,35 +33,52 @@ function guessLetter() {
                 answerArray[i] = letter;
             }
         }
-    } 
+    }
 
-    if (currentWord.indexOf(letter)>-1) {}
-    else  {
-            	lettersGuessed.push(" " + letter);
-            	lettersGuessed.sort();
-            }
+    if (currentWord.indexOf(letter) > -1) {} else {
+        lettersGuessed.push(" " + letter);
+        lettersGuessed.sort();
+    }
 
-	currentWordElement.innerHTML = answerArray.join(" ");
+    currentWordElement.innerHTML = answerArray.join(" ");
 
 }
+// here we will increase wins by 1, display da shit, and show buttons that get another random word.
+function finishedWord() {
+    var finalWord = answerArray.join("");
+    if (currentWord == finalWord) {
+    	alert('ya did it ya bitch!');
+        return wins++;
+        showscore ();
+    }
+}
 
-function uniqueLetters () {
-	$.each(lettersGuessed, function(i, el) {
-    	if($.inArray(el, uniqueLettersGuessed) === -1) uniqueLettersGuessed.push(el);
-	});
+function uniqueLetters() {
+    $.each(lettersGuessed, function(i, el) {
+        if ($.inArray(el, uniqueLettersGuessed) === -1) uniqueLettersGuessed.push(el);
+    });
 }
 
 document.onkeyup = function(event) {
     var letter = String.fromCharCode(event.keyCode).toLowerCase();
     guessLetter();
-    uniqueLetters ();
+    uniqueLetters();
     showscore();
+    lostGame();
+    finishedWord();
 }
 
 function showscore() {
     winElement.innerHTML = "<p>Wins: " + wins + "</p>"
-    guessesRemainingElement.innerHTML = "Guesses Remaining: " + guessesLeft ();
+    guessesRemainingElement.innerHTML = "Guesses Remaining: " + guessesLeft();
     guessedLettersElement.innerHTML = "Letters Guessed:" + uniqueLettersGuessed;
+};
+
+function lostGame() {
+    if (uniqueLettersGuessed.length === 12) {
+        confirm("Game Over! You ran out of guesses. Click cancel to keep trying, click OK to try a new word!")
+            // ADD FUNCTION TO GO TO NEXT WORD HERE!
+    }
 };
 
 setUpGame();
