@@ -3,18 +3,30 @@ var winElement = document.querySelector("#wins");
 var guessesRemainingElement = document.querySelector("#guesses-remaining");
 var guessedLettersElement = document.querySelector("#guessed");
 var currentWordElement = document.querySelector("#currentword");
-var currentWord = words[Math.floor(Math.random() * words.length)];
+var currentWord =[];
 var wins = 0;
 var lettersGuessed = [];
 var uniqueLettersGuessed = [];
 var s;
 var answerArray = [];
+var images = []
+
+// function showImages() {
+// 	for (wins=i) {
+// 		document.querySelector("#img-holder") = images [i]
+// 	}
+// }
 
 function guessesLeft() {
     return 12 - uniqueLettersGuessed.length
 };
 
 function setUpGame() {
+	currentWord = words[wins];
+	uniqueLettersGuessed = [];
+    lettersGuessed = [];
+    answerArray=[];
+
     for (var i = 0; i < currentWord.length; i++) {
         answerArray[i] = "_";
     }
@@ -23,9 +35,7 @@ function setUpGame() {
     currentWordElement.innerHTML = s;
 }
 
-function guessLetter() {
-    var letter = String.fromCharCode(event.keyCode).toLowerCase();
-
+function guessLetter(letter) {
     if (letter.length > 0) {
         for (var i = 0; i < currentWord.length; i++) {
 
@@ -47,9 +57,10 @@ function guessLetter() {
 function finishedWord() {
     var finalWord = answerArray.join("");
     if (currentWord == finalWord) {
-    	alert('ya did it ya bitch!');
-        return wins++;
-        showscore ();
+        wins++;
+        showscore();
+        // showImages();
+        // setUpGame();
     }
 }
 
@@ -61,7 +72,7 @@ function uniqueLetters() {
 
 document.onkeyup = function(event) {
     var letter = String.fromCharCode(event.keyCode).toLowerCase();
-    guessLetter();
+    guessLetter(letter);
     uniqueLetters();
     showscore();
     lostGame();

@@ -1,5 +1,25 @@
-/*#currentword {
-	text-decoration: underline;
-	visibility: hidden;
-	color: white;
-}*/
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background-image: url("../images/broken.png"), linear-gradient(thistle, white);
+/*    background: thistle;
+    background: linear-gradient(thistle, white);*/
+}
+
+.container {
+	margin-top:4%;
+}
+
+.button {
+	text-align: right;
+	margin:10px;
+	display:none;
+}
+
+
+
+
+
