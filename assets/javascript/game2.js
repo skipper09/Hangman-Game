@@ -17,6 +17,8 @@ var images = []
 // 	}
 // }
 
+
+
 function guessesLeft() {
     return 12 - uniqueLettersGuessed.length
 };
@@ -92,4 +94,11 @@ function lostGame() {
     }
 };
 
+$(".btn").on("click",function () {
+	setUpGame();
+});
+
 setUpGame();
+
+
+
