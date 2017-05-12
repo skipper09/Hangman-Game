@@ -18,6 +18,11 @@ body {
 	margin:10px;
 }
 
+.hidden {
+	visibility: hidden;
+	display:none;
+}
+
 
 
 
