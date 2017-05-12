@@ -23,6 +23,16 @@ body {
 	display:none;
 }
 
+h1 {
+	font-family: 'Coming Soon', cursive;
+	font-size: 5em;
+	line-height: .8em;
+}
+
+#currentword {
+	margin-left:20%;
+}
+
 
 
 

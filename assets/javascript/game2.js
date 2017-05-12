@@ -68,7 +68,12 @@ function finishedWord() {
         wins++;
         showscore();
         showTip();
+    	playSound();
     }
+}
+
+function playSound () {
+	document.getElementById('audio').play();
 }
 
 function uniqueLetters() {
@@ -100,6 +105,7 @@ function lostGame() {
 
 $(".btn").on("click",function () {
 	setUpGame();
+	showscore();
 });
 
 setUpGame();
