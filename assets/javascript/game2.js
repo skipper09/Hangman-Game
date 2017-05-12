@@ -99,7 +99,7 @@ function showscore() {
 
 function lostGame() {
     if (uniqueLettersGuessed.length === 12) {
-        confirm("Game Over! You ran out of guesses.")
+        alert("You should have gotten it by now!")
     }
 };
 
