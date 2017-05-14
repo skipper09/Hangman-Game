@@ -9,7 +9,7 @@ var lettersGuessed = [];
 var uniqueLettersGuessed = [];
 var s;
 var answerArray = [];
-var images = []
+var wordFinished = false
 var tips = {
 	titles: ["Dessert","Hot Baths","Good Wine","Friends and Family","Shave your Head","Key his Car","Burn his House Down"],
 	caption: ["Go ahead, treat yourself to some extra dessert. After a break up, its important to indulge yourself, both physically and emotionally. Allow yourself to cry when you need to. Once you've allowed yourself time to grieve you're able to pick up the pieces faster",
@@ -69,6 +69,7 @@ function finishedWord() {
         showscore();
         showTip();
     	playSound();
+        wordFinished = true;
     }
 }
 
@@ -83,12 +84,14 @@ function uniqueLetters() {
 }
 
 document.onkeyup = function(event) {
+    if (wordFinished == false) {
     var letter = String.fromCharCode(event.keyCode).toLowerCase();
     guessLetter(letter);
     uniqueLetters();
     showscore();
     lostGame();
     finishedWord();
+    }
 }
 
 function showscore() {
@@ -104,6 +107,7 @@ function lostGame() {
 };
 
 $(".btn").on("click",function () {
+    wordFinished = false;
 	setUpGame();
 	showscore();
 });
