@@ -1,10 +1,13 @@
-var words = ["dessert", "baths", "wine", "friends", "shaveyourhead", "keyhiscar", "burnhishousedown"];
+var words = ["dessert", "baths", "wine", "friends", "shaveyourhead", "keyhiscar", "burnhishouse down"];
 var winElement = document.querySelector("#wins");
+var lossesElement = document.querySelector('#losses');
 var guessesRemainingElement = document.querySelector("#guesses-remaining");
 var guessedLettersElement = document.querySelector("#guessed");
 var currentWordElement = document.querySelector("#currentword");
 var currentWord =[];
 var wins = 0;
+var level = 0;
+var losses = 0;
 var lettersGuessed = [];
 var uniqueLettersGuessed = [];
 var s;
@@ -21,8 +24,8 @@ var tips = {
 }
 
 function showTip () {
-	$("#title").html(tips.titles[wins-1]);
-	$('#image-caption').html(tips.caption[wins-1]);
+	$("#title").html(tips.titles[level-1]);
+	$('#image-caption').html(tips.caption[level-1]);
 };
 
 function guessesLeft() {
@@ -30,7 +33,7 @@ function guessesLeft() {
 };
 
 function setUpGame() {
-	currentWord = words[wins];
+	currentWord = words[level];
 	uniqueLettersGuessed = [];
     lettersGuessed = [];
     answerArray=[];
@@ -66,6 +69,7 @@ function finishedWord() {
     var finalWord = answerArray.join("");
     if (currentWord == finalWord) {
         wins++;
+        level++;
         showscore();
         showTip();
     	playSound();
@@ -96,13 +100,20 @@ document.onkeyup = function(event) {
 
 function showscore() {
     winElement.innerHTML = "<p>Wins: " + wins + "</p>"
+    lossesElement.innerHTML = "<p>Losses: " + losses + "</p>"
     guessesRemainingElement.innerHTML = "Guesses Remaining: " + guessesLeft();
     guessedLettersElement.innerHTML = "Letters Guessed:" + uniqueLettersGuessed;
 };
 
 function lostGame() {
     if (uniqueLettersGuessed.length === 12) {
-        alert("You should have gotten it by now!")
+        alert("You should have gotten it by now! The answer was \"" + tips.titles[level] + ".\" Try your hand at this new word.")
+        level++;
+        losses++;
+        wordFinished = false;
+        setUpGame();
+        showscore();
+        showTip();
     }
 };
 
